@@ -5,11 +5,12 @@
 <h1>Hello, world!</h1>
 
 <button @onclick=buttonClick> click me </button>
-<p>You clicked on the button @timesClicked times most recently at @lastClicked</p>
+<p>You clicked on the this super cool button @timesClicked times but you did it most recently at @lastClicked</p>
+<p>I hope you're having so much fun</p>
 
 @code
 {
-    
+
     int timesClicked = 0;
     DateTime lastClicked;
     void buttonClick()
