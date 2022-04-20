@@ -1,21 +1,30 @@
 ﻿@page "/"
-
 <PageTitle>Index</PageTitle>
-
-<h1>Hello, world!</h1>
-
-<button @onclick=buttonClick> click me </button>
-<p>You clicked on the this super cool button @timesClicked times but you did it most recently at @lastClicked</p>
-<p>I hope you're having so much fun</p>
-
+<h1>Hello, Static Web Apps!</h1>
+<h3>This is Feature 1</h3>
+<input @bind=increment type='number'/>
+<button @onclick=buttonClick>Click Me</button>
+<p>You clicked @timesClicked, as recently as @lastClicked</p>
+<label>Your Name
+    <input type='text' @bind=userName/>
+</label>
+<button @onclick=callApi>Greet Me!</button>
+<p>@apiResponse</p>
 @code
 {
-
+    string userName;
+    string apiResponse = "Enter your name and click 'Greet Me'";
     int timesClicked = 0;
+    int increment = 1;
     DateTime lastClicked;
     void buttonClick()
     {
-        timesClicked++;
+        timesClicked+=increment;
         lastClicked = DateTime.Now;
+    }
+    async Task callApi()
+    {
+        var httpClient = new HttpClient();
+        apiResponse = await httpClient.GetStringAsync($"/api/HttpTrigger1?name={userName}");
     }
 }
